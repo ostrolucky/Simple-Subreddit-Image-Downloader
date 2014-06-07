@@ -9,9 +9,9 @@ This script just downloads all directly linked images in subreddit. For more com
 
 Requirements
 ============
-bash (cygwin is OK)
-wget
+- bash (cygwin is OK)
+- wget
 
 Usage
 =====
-`./rdit.sh <subreddit_name>
+`./rdit.sh <subreddit_name>`
