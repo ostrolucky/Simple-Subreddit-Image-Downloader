@@ -5,7 +5,7 @@ output="down"
 useragent="Love by u/gadelat"
 
 subreddit=$1
-url="https://pay.reddit.com/r/$subreddit/.json"
+url="https://www.reddit.com/r/$subreddit/.json"
 content=`wget -U "$useragent" --no-check-certificate -q -O - $url`
 mkdir -p $output
 while : ; do
