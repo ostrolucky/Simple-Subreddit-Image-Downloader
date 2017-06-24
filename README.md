@@ -1,5 +1,7 @@
 Simple Subreddit Image Downloader
 ==========================
+Tired of all of those reddit downloaders which want you to install tons of dependencies and then don't work anyway? Me too.
+
 *Simple Subreddit Image Downloader* is bash script which:
 - has minimal external dependencies
 - downloads full-size images from subreddits

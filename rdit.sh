@@ -9,13 +9,12 @@ url="https://www.reddit.com/r/$subreddit/.json"
 content=`wget -U "$useragent" --no-check-certificate -q -O - $url`
 mkdir -p $output
 while : ; do
-    urls=$(echo -e "$content"|grep -Po '"url":.*?[^\\]",'|cut -f 4 -d '"')
+    urls=$(echo -e "$content"|grep -Po '"source": {"url":.*?[^\\]",'|cut -f 6 -d '"')
     names=$(echo -e "$content"|grep -Po '"title":.*?[^\\]",'|cut -f 4 -d '"')
     ids=$(echo -e "$content"|grep -Po '"id":.*?[^\\]",'|cut -f 4 -d '"')
     a=1
     for url in $(echo -e "$urls"); do
         if [ -n  "`echo "$url"|egrep \".gif|.jpg\"`" ]; then
-            #echo -n "$url: "
             name=`echo -e "$names"|sed -n "$a"p`
             id=`echo -e "$ids"|sed -n "$a"p`
             echo $name
