@@ -6,7 +6,7 @@ useragent="Love by u/gadelat"
 
 subreddit=$1
 url="https://www.reddit.com/r/$subreddit/.json"
-content=`wget -U "$useragent" --no-check-certificate -q -O - $url`
+content=`wget -U "$useragent" -q -O - $url`
 mkdir -p $output
 while : ; do
     urls=$(echo -e "$content"|grep -Po '"source": {"url":.*?[^\\]",'|cut -f 6 -d '"')
