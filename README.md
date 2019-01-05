@@ -14,6 +14,7 @@ Requirements
 ============
 - bash (cygwin is OK)
 - wget
+- GNU grep (on MacOS install with `brew install grep --with-default-names`)
 
 Usage
 =====
