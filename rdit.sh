@@ -1,13 +1,12 @@
 #!/bin/bash
 
 #cfg
-output="down"
 useragent="Love by u/gadelat"
 
 subreddit=$1
 url="https://www.reddit.com/r/$subreddit/.json?raw_json=1"
 content=`wget -U "$useragent" -q -O - $url`
-mkdir -p $output
+mkdir -p $subreddit
 while : ; do
     urls=$(echo -e "$content"|grep -Po '"source": {"url":.*?[^\\]",'|cut -f 6 -d '"')
     names=$(echo -e "$content"|grep -Po '"title":.*?[^\\]",'|cut -f 4 -d '"')
@@ -19,7 +18,7 @@ while : ; do
             id=`echo -e "$ids"|sed -n "$a"p`
             echo $name
             newname="$name"_"$subreddit"_$id.${url##*.}
-            wget -U "$useragent" --no-check-certificate -nv -nc -P down -O "$output/$newname" $url
+            wget -U "$useragent" --no-check-certificate -nv -nc -P down -O "$subreddit/$newname" $url
         fi
         a=$(($a+1))
     done
