@@ -19,4 +19,4 @@ Usage
 =====
 `./download-subreddit-images.sh <subreddit_name>`
 
-Script downloads images to folder named "down" in current directory. If you want to change that, you need to edit destination in rdit.sh for now.
+Script downloads images to `<subreddit_name>` folder in current directory. If you want to change that, you need to edit destination in rdit.sh for now.
