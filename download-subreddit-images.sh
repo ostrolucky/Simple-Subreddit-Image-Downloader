@@ -2,10 +2,11 @@
 
 #cfg
 useragent="Love by u/gadelat"
+timeout=60
 
 subreddit=$1
 url="https://www.reddit.com/r/$subreddit/.json?raw_json=1"
-content=`wget -U "$useragent" -q -O - $url`
+content=`wget -T $timeout -U "$useragent" -q -O - $url`
 mkdir -p $subreddit
 while : ; do
     urls=$(echo -n "$content"| jq -r '.data.children[]|select(.data.post_hint|test("image")) | .data.preview.images[0].source.url')
@@ -19,7 +20,7 @@ while : ; do
         ext=`echo -n "${url##*.}"|cut -d '?' -f 1`
         newname="$name"_"$subreddit"_$id.$ext
         echo $name
-        wget -U "$useragent" --no-check-certificate -nv -nc -P down -O "$subreddit/$newname" $url &>/dev/null &
+        wget -T $timeout -U "$useragent" --no-check-certificate -nv -nc -P down -O "$subreddit/$newname" $url &>/dev/null &
         a=$(($a+1))
     done
     after=$(echo -n "$content"| jq -r '.data.after')
@@ -27,6 +28,6 @@ while : ; do
         break
     fi
     url="https://www.reddit.com/r/$subreddit/.json?count=200&after=$after&raw_json=1"
-    content=`wget -U "$useragent" --no-check-certificate -q -O - $url`
+    content=`wget -T $timeout -U "$useragent" --no-check-certificate -q -O - $url`
     #echo -e "$urls"
 done
