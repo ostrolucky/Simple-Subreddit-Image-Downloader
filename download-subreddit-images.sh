@@ -20,9 +20,9 @@ url="https://www.reddit.com/r/$subreddit/$sort/.json?raw_json=1&t=$top_time"
 content=`wget -T $timeout -U "$useragent" -q -O - $url`
 mkdir -p $subreddit
 while : ; do
-    urls=$(echo -n "$content"| jq -r '.data.children[]|select(.data.post_hint|test("image")) | .data.preview.images[0].source.url')
-    names=$(echo -n "$content"| jq -r '.data.children[]|select(.data.post_hint|test("image")) | .data.title')
-    ids=$(echo -n "$content"| jq -r '.data.children[]|select(.data.post_hint|test("image")) | .data.id')
+    urls=$(echo -n "$content"| jq -r '.data.children[]|select(.data.post_hint|test("image")?) | .data.preview.images[0].source.url')
+    names=$(echo -n "$content"| jq -r '.data.children[]|select(.data.post_hint|test("image")?) | .data.title')
+    ids=$(echo -n "$content"| jq -r '.data.children[]|select(.data.post_hint|test("image")?) | .data.id')
     a=1
     wait # prevent spawning too many processes
     for url in $urls; do
