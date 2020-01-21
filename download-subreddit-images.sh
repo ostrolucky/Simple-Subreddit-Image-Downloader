@@ -34,7 +34,7 @@ while : ; do
         wget -T $timeout -U "$useragent" --no-check-certificate -nv -nc -P down -O "$subreddit/$newname" $url &>/dev/null &
         a=$(($a+1))
     done
-    after=$(echo -n "$content"| jq -r '.data.after')
+    after=$(echo -n "$content"| jq -r '.data.after//empty')
     if [[ -z $after ]]; then
         break
     fi
