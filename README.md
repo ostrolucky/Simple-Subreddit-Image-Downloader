@@ -7,7 +7,7 @@ Tired of all of those reddit downloaders which want you to install tons of depen
 - Linux/MacOS/Windows
 - Parallel download
 
-This script just downloads all directly linked images in subreddit. For more complex usage, use other reddit image downloader.
+This script just downloads all directly linked images in subreddit. It can also download with a specific sort. For more complex usage, use other reddit image downloader.
 
 Requirements
 ============
@@ -17,6 +17,10 @@ Requirements
 
 Usage
 =====
-`./download-subreddit-images.sh <subreddit_name>`
+```
+./download-subreddit-images.sh <subreddit_name>
+./download-subreddit-images.sh <subreddit_name> <hot|new|rising|top>
+./download-subreddit-images.sh <subreddit_name> top <all|year|month|week|day>
+```
 
 Script downloads images to `<subreddit_name>` folder in current directory. If you want to change that, you need to edit destination in rdit.sh for now.
