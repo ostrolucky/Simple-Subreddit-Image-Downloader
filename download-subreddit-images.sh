@@ -38,9 +38,6 @@ while : ; do
     if [[ -z $after ]]; then
         break
     fi
-    if [[ $after == "null" ]]; then
-        break
-    fi
     url="https://www.reddit.com/r/$subreddit/$sort/.json?count=200&after=$after&raw_json=1&t=$top_time"
     content=`wget -T $timeout -U "$useragent" --no-check-certificate -q -O - $url`
 done
