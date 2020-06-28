@@ -29,7 +29,7 @@ while : ; do
         name=`echo -n "$names"|sed -n "$a"p`
         id=`echo -n "$ids"|sed -n "$a"p`
         ext=`echo -n "${url##*.}"|cut -d '?' -f 1`
-        newname="$name"_"$subreddit"_$id.$ext
+        newname=`echo $name | sed "s/^\///;s/\// /g"`_"$subreddit"_$id.$ext
         echo $name
         wget -T $timeout -U "$useragent" --no-check-certificate -nv -nc -P down -O "$subreddit/$newname" $url &>/dev/null &
         a=$(($a+1))
