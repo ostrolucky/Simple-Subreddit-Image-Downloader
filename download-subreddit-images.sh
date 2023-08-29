@@ -2,7 +2,6 @@
 
 #cfg
 useragent="Love by u/gadelat"
-timeout=60
 
 subreddit=$1
 sort=$2
@@ -17,7 +16,7 @@ if [ -z $top_time ];then
 fi
 
 url="https://www.reddit.com/r/$subreddit/$sort/.json?raw_json=1&t=$top_time"
-content=`wget -T $timeout -U "$useragent" -q -O - $url`
+content=`curl -H "User-Agent: $useragent" $url`
 mkdir -p $subreddit
 while : ; do
     urls=$(echo -n "$content"| jq -r '.data.children[]|select(.data.post_hint|test("image")?) | .data.preview.images[0].source.url')
@@ -31,7 +30,7 @@ while : ; do
         ext=`echo -n "${url##*.}"|cut -d '?' -f 1`
         newname=`echo $name | sed "s/^\///;s/\// /g"`_"$subreddit"_$id.$ext
         echo $name
-        wget -T $timeout -U "$useragent" --no-check-certificate -nv -nc -P down -O "$subreddit/$newname" $url &>/dev/null &
+        curl -H "User-Agent: $useragent" --no-clobber --output "$subreddit/$newname" $url &>/dev/null &
         a=$(($a+1))
     done
     after=$(echo -n "$content"| jq -r '.data.after//empty')
@@ -39,5 +38,5 @@ while : ; do
         break
     fi
     url="https://www.reddit.com/r/$subreddit/$sort/.json?count=200&after=$after&raw_json=1&t=$top_time"
-    content=`wget -T $timeout -U "$useragent" --no-check-certificate -q -O - $url`
+    content=`curl -H "User-Agent: $useragent" $url`
 done

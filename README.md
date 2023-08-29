@@ -12,7 +12,7 @@ This script just downloads all directly linked images in subreddit. It can also 
 Requirements
 ============
 - bash (cygwin is OK)
-- wget
+- curl
 - jq
 
 Usage
