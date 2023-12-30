@@ -18,9 +18,9 @@ Requirements
 Usage
 =====
 ```
-./download-subreddit-images.sh <subreddit_name>
-./download-subreddit-images.sh <subreddit_name> <hot|new|rising|top>
-./download-subreddit-images.sh <subreddit_name> top <all|year|month|week|day>
+Usage: ./download-subreddit-images.sh <subreddit_name> [hot|new|rising|top|controversial] [all|year|month|week|day] [limit]
+Examples: ./download-subreddit-images.sh starterpacks new week 10
+          ./download-subreddit-images.sh funny top all 50"
 ```
 
 Script downloads images to `<subreddit_name>` folder in current directory. If you want to change that, you need to edit destination in rdit.sh for now.
