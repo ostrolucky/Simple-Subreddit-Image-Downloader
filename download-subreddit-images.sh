@@ -38,7 +38,7 @@ while : ; do
     for url in $urls; do
         name=`echo -n "$names"|sed -n "$a"p`
         id=`echo -n "$ids"|sed -n "$a"p`
-        ext=`echo -n "${url##*.}"|cut -d '?' -f 1`
+        ext=`echo -n "${url##*.}"|cut -d '?' -f 1 | sed 's/gif/png/' `
         newname=`echo $name | sed "s/^\///;s/\// /g"`_"$subreddit"_$id.$ext
         printf "$i/$limit : $newname\n"
         curl --no-clobber --output "$subreddit/$newname" $url &>/dev/null &
