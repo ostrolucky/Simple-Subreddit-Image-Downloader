@@ -41,7 +41,7 @@ while : ; do
         ext=`echo -n "${url##*.}"|cut -d '?' -f 1`
         newname=`echo $name | sed "s/^\///;s/\// /g"`_"$subreddit"_$id.$ext
         printf "$i/$limit : $newname\n"
-        curl --no-clobber --output "$subreddit/$newname" $url &>/dev/null &
+        curl --retry 3 --no-clobber --output "$subreddit/$newname" $url &>/dev/null &
         ((a=a+1))
         ((i=i+1))
         if [ $i -gt $limit ] ; then
